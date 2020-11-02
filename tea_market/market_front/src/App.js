@@ -1,10 +1,10 @@
-import './App.css';
-import ClippedDrawer from './components/ClippedDrawer';
+import "./App.css";
+import ClippedDrawer from "./components/ClippedDrawer";
 
 function App() {
   return (
     <div className="App">
-    <ClippedDrawer/>
+      <ClippedDrawer />
     </div>
   );
 }

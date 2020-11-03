@@ -15,7 +15,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import TocIcon from "@material-ui/icons/Toc";
 import React from "react";
-import MainContainer from "./MainContainer";
+import MainContainer from "../containers/MainContainer";
 import ToolbarApp from "./ToolbarApp";
 
 const drawerWidth = 240;

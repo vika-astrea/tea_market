@@ -4,7 +4,6 @@ import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
 
 export default function MainContainer() {
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -14,12 +13,12 @@ export default function MainContainer() {
       margin: "10px",
     },
 
-    gridList:{
-        justifyItems: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    }
+    gridList: {
+      justifyItems: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      alignContent: "center",
+    },
   }));
 
   const classes = useStyles();

@@ -42,7 +42,7 @@ export default function MediaCard(props) {
             by: {props.vendor}
           </Typography>
         </CardContent>
-      </CardActionArea>     
+      </CardActionArea>
     </Card>
   );
 }

@@ -49,9 +49,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ClippedDrawer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [openPrice, setOpenPrice] = React.useState(false);
+
+  const [type, setType] = React.useState("");
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const handleClickPrice = () => {
+    setOpenPrice(!openPrice);
   };
 
   return (
@@ -90,25 +97,41 @@ export default function ClippedDrawer() {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {["Tea", "Cups", "Pots", "Sets", "Misc"].map((text) => (
-                  <ListItem button key={text} className={classes.nested}>
+                {["Tea", "Cup", "Pot", "Set", "Misc"].map((text) => (
+                  <ListItem
+                    button
+                    key={text}
+                    className={classes.nested}
+                    onClick={(e) => setType(text)}
+                  >
                     <ListItemText primary={text} />
                   </ListItem>
                 ))}
               </List>
             </Collapse>
-            <ListItem button>
+            <ListItem button onClick={handleClickPrice}>
               <ListItemIcon>
                 <AttachMoneyIcon />
               </ListItemIcon>
-              <ListItemText primary={" Price "} />
+              <ListItemText primary={"Price"} />
+              {openPrice ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
+            <Collapse in={openPrice} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem button className={classes.nested}>
+                  <ListItemText primary={"Ascending"} />
+                </ListItem>
+                <ListItem button className={classes.nested}>
+                  <ListItemText primary={"Descending"} />
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <MainContainer />
+        <MainContainer type={type} setType={setType} />
       </main>
     </div>
   );

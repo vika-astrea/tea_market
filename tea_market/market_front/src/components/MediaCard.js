@@ -36,7 +36,7 @@ export default function MediaCard(props) {
           </Typography>
           <br />
           <Typography gutterBottom variant="h5" component="h2">
-            Price: {props.price}$ for {props.amount}
+            Price: $ {props.price} for {props.amount}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             by: {props.vendor}

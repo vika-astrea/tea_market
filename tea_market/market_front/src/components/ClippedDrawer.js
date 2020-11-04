@@ -17,6 +17,7 @@ import TocIcon from "@material-ui/icons/Toc";
 import React from "react";
 import MainContainer from "../containers/MainContainer";
 import ToolbarApp from "./ToolbarApp";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const drawerWidth = 240;
 
@@ -50,7 +51,7 @@ export default function ClippedDrawer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPrice, setOpenPrice] = React.useState(false);
-
+  const [func, setFunction] = React.useState();
   const [type, setType] = React.useState("");
 
   const handleClick = () => {
@@ -59,6 +60,11 @@ export default function ClippedDrawer() {
 
   const handleClickPrice = () => {
     setOpenPrice(!openPrice);
+  };
+
+  const handleRemove = () => {
+    setFunction();
+    setType("");
   };
 
   return (
@@ -118,20 +124,34 @@ export default function ClippedDrawer() {
             </ListItem>
             <Collapse in={openPrice} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem button className={classes.nested}>
+                <ListItem
+                  button
+                  className={classes.nested}
+                  onClick={(e) => setFunction(true)}
+                >
                   <ListItemText primary={"Ascending"} />
                 </ListItem>
-                <ListItem button className={classes.nested}>
+                <ListItem
+                  button
+                  className={classes.nested}
+                  onClick={(e) => setFunction(false)}
+                >
                   <ListItemText primary={"Descending"} />
                 </ListItem>
               </List>
             </Collapse>
+            <ListItem button onClick={handleRemove}>
+              <ListItemIcon>
+                <CancelIcon />
+              </ListItemIcon>
+              <ListItemText primary={" Remove all filters "} />
+            </ListItem>
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <MainContainer type={type} setType={setType} />
+        <MainContainer type={type} func={func} />
       </main>
     </div>
   );

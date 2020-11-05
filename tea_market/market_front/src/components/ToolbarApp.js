@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import EmojiFoodBeverageIcon from "@material-ui/icons/EmojiFoodBeverage";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -74,16 +76,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ToolbarApp() {
   const classes = useStyles();
+  let history = useHistory();
+  
+  function handleMainClick() {
+    history.push("/home")};
+
+  function handleLoginClick() {
+      history.push("/login")};
+
+  function handleRegisterClick() {
+        history.push("/register")};    
 
   return (
     <div className={classes.grow}>
       <Toolbar>
+        <div onClick={handleMainClick} style={{display:"flex", cursor:"pointer"}}>
+
+        <Typography className={classes.title} variant="h6" noWrap>
         <IconButton>
           <EmojiFoodBeverageIcon style={{ color: "white" }} />
         </IconButton>
-        <Typography className={classes.title} variant="h6" noWrap>
           Vic's Tea Market
         </Typography>
+        </div>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -99,10 +114,10 @@ export default function ToolbarApp() {
         </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary"onClick={handleLoginClick}>
             Log in
           </Button>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleRegisterClick}>
             Sign Up
           </Button>
         </div>

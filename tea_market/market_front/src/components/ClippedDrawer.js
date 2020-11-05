@@ -15,9 +15,13 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import TocIcon from "@material-ui/icons/Toc";
 import React from "react";
-import MainContainer from "../containers/MainContainer";
 import ToolbarApp from "./ToolbarApp";
 import CancelIcon from "@material-ui/icons/Cancel";
+import { Route, Switch, useHistory } from "react-router-dom";
+import LogInContainer from "../containers/LogInContainer";
+import RegisterContainer from "../containers/RegisterContainer";
+import MainContainer from "../containers/MainContainer";
+
 
 const drawerWidth = 240;
 
@@ -58,6 +62,12 @@ export default function ClippedDrawer() {
     setOpen(!open);
   };
 
+  let history = useHistory();
+
+  function handleLinkClick() {
+    history.push("/login");
+  }
+
   const handleClickPrice = () => {
     setOpenPrice(!openPrice);
   };
@@ -84,7 +94,8 @@ export default function ClippedDrawer() {
         <div className={classes.drawerContainer}>
           <List>
             <ListItemText primary={"Account"} />
-            <ListItem button>
+
+            <ListItem button onClick={handleLinkClick}>
               <ListItemIcon>
                 <AccountCircleIcon color="disabled" />
               </ListItemIcon>
@@ -151,7 +162,17 @@ export default function ClippedDrawer() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <MainContainer type={type} func={func} />
+        <Switch>
+          <Route path="/home">
+            <MainContainer type={type} func={func} />
+          </Route>
+          <Route path="/login">
+            <LogInContainer />
+          </Route>
+          <Route path="/register">
+            <RegisterContainer />
+          </Route>
+        </Switch>
       </main>
     </div>
   );

@@ -21,10 +21,21 @@ export default function MediaCard(props) {
 
   return (
     <Card className={classes.root} key={props.i}>
-      <CardActionArea>
+      <CardActionArea
+        button
+        onClick={(e) => {
+          props.setName(props.name);
+          props.setVendor(props.vendor);
+          props.setPrice(props.price);
+          props.setImg(props.img);
+          props.setType(props.type);
+          props.setMaterial(props.material);
+          props.setAmount(props.amount);
+        }}
+      >
         <CardMedia
           className={classes.media}
-          image={props.image}
+          image={props.img}
           title={props.name}
         />
         <CardContent>

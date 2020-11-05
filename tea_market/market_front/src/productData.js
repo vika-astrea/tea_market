@@ -9,7 +9,7 @@ const productData = [
     amount: "50 bags ",
   },
   {
-    name: "Mint and Caá Tea",
+    name: "Mint and Mate Tea",
     vendor: "Yaci's quality tea",
     price: 60,
     img:

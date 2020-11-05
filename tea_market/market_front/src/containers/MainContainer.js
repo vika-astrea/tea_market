@@ -2,7 +2,7 @@ import productData from "../productData";
 import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import ProductGrid from "./ProductGrid";
+import ProductGrid from "../components/ProductGrid";
 
 export default function MainContainer(props) {
   const useStyles = makeStyles((theme) => ({
@@ -96,6 +96,13 @@ export default function MainContainer(props) {
         material={material}
         price={price}
         amount={amount}
+        setName={setName}
+        setVendor={setVendor}
+        setImg={setImg}
+        setPrice={setPrice}
+        setType={setType}
+        setMaterial={setMaterial}
+        setAmount={setAmount}
       />
     );
   }

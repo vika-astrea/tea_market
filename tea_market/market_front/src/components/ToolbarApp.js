@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  button:{
+    margin:"4px"
+  },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
@@ -112,12 +115,12 @@ export default function ToolbarApp() {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <div className={classes.grow} />
+        <div className={classes.grow} />       
         <div className={classes.sectionDesktop}>
-          <Button variant="contained" color="primary"onClick={handleLoginClick}>
+          <Button variant="contained" color="primary" className={classes.button} onClick={handleLoginClick}>
             Log in
           </Button>
-          <Button variant="contained" color="primary" onClick={handleRegisterClick}>
+          <Button variant="contained" color="primary" className={classes.button} onClick={handleRegisterClick}>
             Sign Up
           </Button>
         </div>

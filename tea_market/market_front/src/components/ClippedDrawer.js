@@ -104,7 +104,7 @@ export default function ClippedDrawer() {
           </List>
           <Divider />
           <List>
-            <ListItemText primary={"Filters"} />
+            <ListItemText primary={"Categories"} />
             <ListItem button onClick={handleClick}>
               <ListItemIcon>
                 <TocIcon />
@@ -140,14 +140,14 @@ export default function ClippedDrawer() {
                   className={classes.nested}
                   onClick={(e) => setFunction(true)}
                 >
-                  <ListItemText primary={"Ascending"} />
+                  <ListItemText primary={"Sort ascending"} />
                 </ListItem>
                 <ListItem
                   button
                   className={classes.nested}
                   onClick={(e) => setFunction(false)}
                 >
-                  <ListItemText primary={"Descending"} />
+                  <ListItemText primary={"Sort descending"} />
                 </ListItem>
               </List>
             </Collapse>

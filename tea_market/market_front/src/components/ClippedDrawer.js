@@ -86,7 +86,7 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItemText primary={"Account"} />
+           
 <NavAccount/>
           </List>
           <Divider />

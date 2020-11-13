@@ -1,4 +1,3 @@
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -8,7 +7,7 @@ import EmojiFoodBeverageIcon from "@material-ui/icons/EmojiFoodBeverage";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import { useHistory } from "react-router-dom";
-
+import AuthButtons from "./AuthButtons";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -60,15 +59,6 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-  button:{
-    margin:"4px"
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {
@@ -80,27 +70,24 @@ const useStyles = makeStyles((theme) => ({
 export default function ToolbarApp() {
   const classes = useStyles();
   let history = useHistory();
-  
+
   function handleMainClick() {
-    history.push("/home")};
-
-  function handleLoginClick() {
-      history.push("/login")};
-
-  function handleRegisterClick() {
-        history.push("/register")};    
+    history.push("/home");
+  }
 
   return (
     <div className={classes.grow}>
       <Toolbar>
-        <div onClick={handleMainClick} style={{display:"flex", cursor:"pointer"}}>
-
-        <Typography className={classes.title} variant="h6" noWrap>
-        <IconButton>
-          <EmojiFoodBeverageIcon style={{ color: "white" }} />
-        </IconButton>
-          Vic's Tea Market
-        </Typography>
+        <div
+          onClick={handleMainClick}
+          style={{ display: "flex", cursor: "pointer" }}
+        >
+          <Typography className={classes.title} variant="h6" noWrap>
+            <IconButton>
+              <EmojiFoodBeverageIcon style={{ color: "white" }} />
+            </IconButton>
+            Vic's Tea Market
+          </Typography>
         </div>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
@@ -115,15 +102,8 @@ export default function ToolbarApp() {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <div className={classes.grow} />       
-        <div className={classes.sectionDesktop}>
-          <Button variant="contained" color="primary" className={classes.button} onClick={handleLoginClick}>
-            Log in
-          </Button>
-          <Button variant="contained" color="primary" className={classes.button} onClick={handleRegisterClick}>
-            Sign Up
-          </Button>
-        </div>
+        <div className={classes.grow} />
+        <AuthButtons />
       </Toolbar>
     </div>
   );

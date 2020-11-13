@@ -50,7 +50,7 @@ export default function LogInContainer() {
       <br />
       <Typography variant="h6" noWrap>
         You don't have an account yet? <Link to="/register">Sign up</Link> and
-        jump right in! it will only take a seccond.
+        jump right in! it will only take a second.
       </Typography>
     </React.Fragment>
   );

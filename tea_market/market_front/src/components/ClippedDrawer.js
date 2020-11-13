@@ -9,7 +9,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -17,11 +16,11 @@ import TocIcon from "@material-ui/icons/Toc";
 import React from "react";
 import ToolbarApp from "./ToolbarApp";
 import CancelIcon from "@material-ui/icons/Cancel";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import LogInContainer from "../containers/LogInContainer";
 import RegisterContainer from "../containers/RegisterContainer";
 import MainContainer from "../containers/MainContainer";
-
+import NavAccount from "./NavAccount";
 
 const drawerWidth = 240;
 
@@ -62,12 +61,6 @@ export default function ClippedDrawer() {
     setOpen(!open);
   };
 
-  let history = useHistory();
-
-  function handleLinkClick() {
-    history.push("/login");
-  }
-
   const handleClickPrice = () => {
     setOpenPrice(!openPrice);
   };
@@ -94,13 +87,7 @@ export default function ClippedDrawer() {
         <div className={classes.drawerContainer}>
           <List>
             <ListItemText primary={"Account"} />
-
-            <ListItem button onClick={handleLinkClick}>
-              <ListItemIcon>
-                <AccountCircleIcon color="disabled" />
-              </ListItemIcon>
-              <ListItemText primary={" Log in "} />
-            </ListItem>
+<NavAccount/>
           </List>
           <Divider />
           <List>

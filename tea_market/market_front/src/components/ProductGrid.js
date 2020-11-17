@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import React from "react";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,8 +80,9 @@ export default function ProductGrid(props) {
             variant="contained"
             color="primary"
             className={classes.button}
+            startIcon={<ShoppingCartIcon/>}
           >
-            Buy Now
+            Add to Cart
           </Button>
         </Grid>
         <Grid item xs={3}>

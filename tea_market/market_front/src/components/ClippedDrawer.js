@@ -10,17 +10,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import CancelIcon from "@material-ui/icons/Cancel";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import TocIcon from "@material-ui/icons/Toc";
 import React from "react";
-import ToolbarApp from "./ToolbarApp";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { Route, Switch} from "react-router-dom";
-import LogInContainer from "../containers/LogInContainer";
-import RegisterContainer from "../containers/RegisterContainer";
-import MainContainer from "../containers/MainContainer";
+import GeneralSwitch from "./GeneralSwitch";
 import NavAccount from "./NavAccount";
+import ToolbarApp from "./ToolbarApp";
 
 const drawerWidth = 240;
 
@@ -86,8 +83,7 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-           
-<NavAccount/>
+            <NavAccount />
           </List>
           <Divider />
           <List>
@@ -149,17 +145,7 @@ export default function ClippedDrawer() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <Switch>
-          <Route path="/home">
-            <MainContainer type={type} func={func} />
-          </Route>
-          <Route path="/login">
-            <LogInContainer />
-          </Route>
-          <Route path="/register">
-            <RegisterContainer />
-          </Route>
-        </Switch>
+        <GeneralSwitch func={func} type={type} />
       </main>
     </div>
   );

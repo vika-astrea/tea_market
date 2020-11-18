@@ -11,7 +11,13 @@ export default function CartContainer () {
         {userData.user ? (<> <Typography variant="h3">
           My Dashboard
           
-          </Typography> </>):(<NotLogged/>)}
+          
+          </Typography>
+          Productos en venta 
+          ventas totales
+          ((gráficos ?? ))
+          
+           </>):(<NotLogged/>)}
       </>
     )
   

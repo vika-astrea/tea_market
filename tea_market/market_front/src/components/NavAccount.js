@@ -5,7 +5,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -18,7 +17,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 export default function NavAccount() {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
   let history = useHistory();
@@ -45,14 +44,6 @@ export default function NavAccount() {
   function handleLoginClick() {
     history.push("/login");
   }
-
-  const logout = () => {
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-    localStorage.setItem("auth-token", "");
-  };
 
   const handleClick = () => {
     setOpen(!open);
@@ -113,14 +104,6 @@ export default function NavAccount() {
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText>My account settings</ListItemText>
-          </ListItem>
-
-          <ListItem button onClick={logout}>
-            {" "}
-            <ListItemIcon>
-              <CloseIcon />
-            </ListItemIcon>
-            <ListItemText>Log out</ListItemText>
           </ListItem>
         </>
       ) : (

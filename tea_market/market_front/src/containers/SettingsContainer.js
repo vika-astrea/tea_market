@@ -9,9 +9,18 @@ export default function CartContainer () {
     return (
       <>
         {userData.user ? (<> <Typography variant="h3">
-          My Account Settings
+          My Account Settings          
+          </Typography> 
+
+          - Change display Name
+          - Change email
+          - Reset Password
+
+          - Delete Account
+
+           
           
-          </Typography> </>):(<NotLogged/>)}
+          </>):(<NotLogged/>)}
       </>
     )
   

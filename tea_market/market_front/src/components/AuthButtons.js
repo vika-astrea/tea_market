@@ -35,6 +35,7 @@ export default function AuthButtons() {
       token: undefined,
       user: undefined,
     });
+    history.push("/home");
     localStorage.setItem("auth-token", "");
   };
 

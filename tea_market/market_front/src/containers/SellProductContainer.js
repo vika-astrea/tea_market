@@ -10,8 +10,12 @@ export default function CartContainer () {
       <>
         {userData.user ? (<> <Typography variant="h3">
           Sell product
+
+       
+          </Typography>
           
-          </Typography> </>):(<NotLogged/>)}
+          name, type, price, cuantity, material, 
+ </>):(<NotLogged/>)}
       </>
     )
   

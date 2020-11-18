@@ -11,7 +11,6 @@ export default class NotLogged extends Component {
         </Typography>
         <br/>
         <Typography variant="h5">
-
         <Link to="/login">Log in</Link> or <Link to="/register">create an account</Link> and join today !
         </Typography>
       </div>

@@ -3,7 +3,7 @@ import React, { useContext} from 'react';
 import NotLogged from '../components/NotLogged';
 import UserContext from '../context/UserContext'
 
-export default function CartContainer () {
+export default function DashboardContainer () {
   const { userData } = useContext(UserContext);
 
     return (

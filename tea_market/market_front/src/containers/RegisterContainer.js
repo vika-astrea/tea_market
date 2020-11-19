@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import ErrorNotice from "../components/ErrorNotice";
 import UserContext from "../context/UserContext";
 
-export default function LogInContainer() {
+export default function RegisterContainer() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();

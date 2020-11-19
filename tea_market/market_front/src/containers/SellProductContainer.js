@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CartContainer() {
+export default function SellProductContainer() {
   const { userData } = useContext(UserContext);
   const [type, setType] = useState("");
   const [material, setMaterial] = useState("");

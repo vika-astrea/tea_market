@@ -10,8 +10,10 @@ export default function CartContainer () {
       <>
         {userData.user ? (<> <Typography variant="h3">
           My Wishlist
-          
-          </Typography> </>):(<NotLogged/>)}
+                  </Typography>
+                  
+                  -la lista tiene las mismas tarjetas , excepto que solo tienen la opción de Buy Now. 
+ </>):(<NotLogged/>)}
       </>
     )
   

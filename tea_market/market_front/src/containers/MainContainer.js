@@ -1,4 +1,5 @@
-import productData from "../productData";
+import { useQuery } from "react-query";
+import { GetAllProducts } from "../Queries";
 import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
@@ -42,12 +43,18 @@ export default function MainContainer(props) {
     }
   };
 
+  const { isLoading, error, data } = useQuery("repoData", GetAllProducts);
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   if (name === "" && vendor === "") {
     return (
       <React.Fragment>
         <div className={classes.root}>
           <GridList cellHeight={180} className={classes.gridList}>
-            {productData
+            {data
               .filter(filterByType)
               .sort(function (a, b) {
                 if (props.func === true) {
@@ -68,8 +75,8 @@ export default function MainContainer(props) {
                     img={product.img}
                     name={product.name}
                     vendor={product.vendor}
-                    type={product.type.type}
-                    material={product.type.material}
+                    type={product.type}
+                    material={product.material}
                     price={product.price}
                     amount={product.amount}
                     setName={setName}

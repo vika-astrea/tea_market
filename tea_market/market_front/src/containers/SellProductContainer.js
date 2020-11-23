@@ -6,6 +6,8 @@ import NotLogged from "../components/NotLogged";
 import FirstRow from "../components/sell product components/FirstRow";
 import SecondRow from "../components/sell product components/SecondRow";
 import UserContext from "../context/UserContext";
+import { useHistory } from "react-router-dom";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +22,33 @@ export default function SellProductContainer() {
   const { userData } = useContext(UserContext);
   const [type, setType] = useState("");
   const [material, setMaterial] = useState("");
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [price, setPrice] = useState("");
+  const [img, setImg] = useState("");
+  const [vendor, setVendor] = useState("");
+
   const [error, setError] = useState();
+  const history = useHistory();
 
   const classes = useStyles();
+
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
+      const newProduct = { name, vendor, price, img, type, material, amount };
+      await Axios({
+        method: "post",
+        url: "http://localhost:5000/products/new",
+        data: newProduct,
+        headers: { "X-auth-token": userData.token },
+      });
+
+      history.push("/dash");
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
 
   return (
     <>
@@ -43,14 +69,24 @@ export default function SellProductContainer() {
               setType={setType}
               material={material}
               setMaterial={setMaterial}
+              name={name}
+              setName={setName}
+              setVendor={setVendor}
             />
 
             <br />
-            <SecondRow />
+            <SecondRow
+              amount={amount}
+              price={price}
+              url={img}
+              setAmount={setAmount}
+              setPrice={setPrice}
+              setUrl={setImg}
+            />
             <br />
             <>
               {" "}
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={submit}>
                 Sell Item{" "}
               </Button>
             </>

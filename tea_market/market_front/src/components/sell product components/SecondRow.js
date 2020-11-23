@@ -21,7 +21,9 @@ export default function SecondRow(props) {
   return (
     <>
       <FormControl className={classes.formControl}>
-        <TextField id="Ammount" label="Amount" />
+        <TextField id="Ammount" label="Amount" 
+                onChange={(e) => props.setAmount(e.target.value)}
+                value={props.amount}/>
         <br />
       </FormControl>
       <FormControl className={classes.formControl}>
@@ -30,10 +32,14 @@ export default function SecondRow(props) {
           type="number"
           id="price"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          onChange={(e) => props.setPrice(e.target.value)}
+          value={props.price}
         />
       </FormControl>
       <FormControl className={classes.formControl}>
-        <TextField id="img" label="Hosted image url adress" />
+        <TextField id="img" label="Hosted image url adress"
+                onChange={(e) => props.setUrl(e.target.value)}
+                value={props.url} />
         <br />
       </FormControl>
     </>

@@ -1,7 +1,9 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import React from "react";
+import React, {useContext,} from "react";
+import UserContext from "../../context/UserContext";
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -12,10 +14,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FirstRow(props) {
   const classes = useStyles();
+  const { userData } = useContext(UserContext);
+
 
   return (
     <>
-      <TextField id="name" label="Product Name" />
+      <TextField
+        id="name"
+        label="Product Name"
+        onChange={(e) => {props.setName(e.target.value); props.setVendor(userData.user.displayName)}}
+        value={props.name}
+      />
       <FormControl className={classes.formControl}>
         <InputLabel id="type select label">Type</InputLabel>
         <Select

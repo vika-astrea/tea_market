@@ -2,8 +2,10 @@ import { useQuery } from "react-query";
 import { GetAllProducts } from "../Queries";
 import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ProductGrid from "../components/ProductGrid";
+import UserContext from "../context/UserContext";
+
 
 export default function MainContainer(props) {
   const useStyles = makeStyles((theme) => ({
@@ -22,6 +24,9 @@ export default function MainContainer(props) {
     },
   }));
 
+  
+  const { userData } = useContext(UserContext);
+
   const [name, setName] = useState("");
   const [vendor, setVendor] = useState("");
   const [price, setPrice] = useState("");
@@ -29,6 +34,8 @@ export default function MainContainer(props) {
   const [type, setType] = useState("");
   const [material, setMaterial] = useState("");
   const [amount, setAmount] = useState("");
+  const [id, setId]= useState("")
+  const [buyerId, setBuyerId]= useState("")
 
   const classes = useStyles();
 
@@ -79,6 +86,8 @@ export default function MainContainer(props) {
                     material={product.material}
                     price={product.price}
                     amount={product.amount}
+                    id={product._id}
+                    buyerId={userData.user.id}
                     setName={setName}
                     setVendor={setVendor}
                     setImg={setImg}
@@ -86,6 +95,8 @@ export default function MainContainer(props) {
                     setType={setType}
                     setMaterial={setMaterial}
                     setAmount={setAmount}
+                    setId={setId}
+                    setBuyerId={setBuyerId}
                   />
                 );
               })}
@@ -103,6 +114,8 @@ export default function MainContainer(props) {
         material={material}
         price={price}
         amount={amount}
+        id={id}
+        buyerId={buyerId}
         setName={setName}
         setVendor={setVendor}
         setImg={setImg}
@@ -110,6 +123,8 @@ export default function MainContainer(props) {
         setType={setType}
         setMaterial={setMaterial}
         setAmount={setAmount}
+        setId={setId}
+        setBuyerId={setBuyerId}
       />
     );
   }

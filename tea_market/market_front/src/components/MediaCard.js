@@ -31,6 +31,8 @@ export default function MediaCard(props) {
           props.setType(props.type);
           props.setMaterial(props.material);
           props.setAmount(props.amount);
+          props.setId(props.id)
+          props.setBuyerId(props.buyerId)
         }}
       >
         <CardMedia

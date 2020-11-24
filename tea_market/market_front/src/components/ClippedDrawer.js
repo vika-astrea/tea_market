@@ -104,7 +104,7 @@ export default function ClippedDrawer() {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {["tea", "Cup", "Pot", "Set", "Misc"].map((text) => (
+                {["Tea", "Cup", "Pot", "Set", "Misc"].map((text) => (
                   <ListItem
                     button
                     key={text}

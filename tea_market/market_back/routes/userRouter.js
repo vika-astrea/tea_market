@@ -4,6 +4,8 @@ const auth = require("../middleware/auth");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
+//register
+
 router.post("/register", async (req, res) => {
   try {
     const { email, password, passwordCheck, displayName } = req.body;
@@ -36,6 +38,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//login
+
 router.post("/login", async (req, res) =>{
   try{
     const {email, password} = req.body;
@@ -62,6 +66,8 @@ router.post("/login", async (req, res) =>{
   }catch(err){res.status(500).json({error: error.message});}
 })
 
+//delete user
+
 router.delete("/deleteUser",auth, async(req,res)=>{
   try{
     const deletedUser = await User.findByIdAndDelete(req.user);
@@ -71,6 +77,8 @@ router.delete("/deleteUser",auth, async(req,res)=>{
   }
 
 })
+
+//token validation
 
 router.post("/tokenIsValid", async (req,res)=>{
   try{
@@ -89,10 +97,46 @@ router.post("/tokenIsValid", async (req,res)=>{
   }
 })
 
+//Updating User Info
+
+//Add to cart
+router.put("/addToCart",auth, async (req, res) => {
+  try{
+    const {_id, productId} = req.body;
+
+    const newCartProduct = await User.updateOne({ _id: _id },
+      { $addToSet: { cart: productId } })
+
+      return res.json(newCartProduct)
+  }catch(err){
+    res.status(500).json({error: err.message})
+  }
+})
+
+//Add to Wishlist
+
+router.put("/addToWishlist",auth, async (req, res) => {
+  try{
+    const {_id, productId} = req.body;
+
+    const newWishlistProduct = await User.updateOne({ _id: _id },
+      { $addToSet: { wishlist: productId } })
+
+      return res.json(newWishlistProduct)
+  }catch(err){
+    res.status(500).json({error: err.message})
+  }
+})
+
+//Getting user info
+//get User name + id
+
 router.get("/",auth,async(req,res)=>{
   const user= await User.findById(req.user);
   res.json({displayName: user.displayName,
-  id:user._id})
+  id:user._id, cart:user.cart, wishlist:user.wishlist})
 })
+
+
 
 module.exports = router;

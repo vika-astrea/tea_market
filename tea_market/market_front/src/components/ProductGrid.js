@@ -4,8 +4,10 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React from "react";
+import React, {useContext} from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Axios from "axios"
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +28,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductGrid(props) {
   const classes = useStyles();
+  const { userData } = useContext(UserContext);
+
+   const addToCart = async (e) => {
+    e.preventDefault();
+    try {
+      const prodToAdd = { _id: props.buyerId, productId: props.id };
+      await Axios({
+        method: "put",
+        url: "http://localhost:5000/user/addToCart",
+        data: prodToAdd,
+        headers: { "X-auth-token": userData.token },
+      });
+
+  
+    } catch (err) {}
+  };
+
+
 
   return (
     <div className={classes.root}>
@@ -44,6 +64,8 @@ export default function ProductGrid(props) {
               props.setType("");
               props.setMaterial("");
               props.setAmount("");
+              props.setId("");
+              props.setBuyerId("")
             }}
           >
             Back to catalog
@@ -81,7 +103,8 @@ export default function ProductGrid(props) {
             color="primary"
             className={classes.button}
             startIcon={<ShoppingCartIcon/>}
-          >
+            onClick={addToCart}
+            >
             Add to Cart
           </Button>
         </Grid>
@@ -91,6 +114,7 @@ export default function ProductGrid(props) {
             color="secondary"
             className={classes.button}
             startIcon={<FavoriteBorderIcon />}
+            
           >
             Add to Wishlist
           </Button>

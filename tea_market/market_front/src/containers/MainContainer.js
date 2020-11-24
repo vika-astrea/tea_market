@@ -33,7 +33,7 @@ export default function MainContainer(props) {
   const classes = useStyles();
 
   const filterByType = (product) => {
-    if (product.type.type === props.type) {
+    if (product.type === props.type) {
       return true;
     }
     if (props.type === "") {

@@ -67,12 +67,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ToolbarApp() {
+export default function ToolbarApp(props) {
   const classes = useStyles();
   let history = useHistory();
 
   function handleMainClick() {
+    props.setType("");
     history.push("/home");
+    
   }
 
   return (

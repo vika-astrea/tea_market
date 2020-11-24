@@ -14,10 +14,12 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import TocIcon from "@material-ui/icons/Toc";
-import React from "react";
+import React,{useState} from "react";
 import GeneralSwitch from "./GeneralSwitch";
 import NavAccount from "./NavAccount";
 import ToolbarApp from "./ToolbarApp";
+import { useHistory } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -49,10 +51,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ClippedDrawer() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [openPrice, setOpenPrice] = React.useState(false);
-  const [func, setFunction] = React.useState();
-  const [type, setType] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [openPrice, setOpenPrice] = useState(false);
+  const [func, setFunction] = useState();
+  const [type, setType] = useState("");
+
+
+
+  let history = useHistory();
+
 
   const handleClick = () => {
     setOpen(!open);
@@ -71,7 +78,7 @@ export default function ClippedDrawer() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <ToolbarApp />
+        <ToolbarApp setType={setType} />
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -97,12 +104,12 @@ export default function ClippedDrawer() {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {["Tea", "Cup", "Pot", "Set", "Misc"].map((text) => (
+                {["tea", "Cup", "Pot", "Set", "Misc"].map((text) => (
                   <ListItem
                     button
                     key={text}
                     className={classes.nested}
-                    onClick={(e) => setType(text)}
+                    onClick={(e) =>{history.push("/home"); setType(text)}}
                   >
                     <ListItemText primary={text} />
                   </ListItem>
@@ -121,14 +128,14 @@ export default function ClippedDrawer() {
                 <ListItem
                   button
                   className={classes.nested}
-                  onClick={(e) => setFunction(true)}
+                  onClick={(e) =>{history.push("/home"); setFunction(true)}}
                 >
                   <ListItemText primary={"Sort ascending"} />
                 </ListItem>
                 <ListItem
                   button
                   className={classes.nested}
-                  onClick={(e) => setFunction(false)}
+                  onClick={(e) => {history.push("/home");setFunction(false)}}
                 >
                   <ListItemText primary={"Sort descending"} />
                 </ListItem>

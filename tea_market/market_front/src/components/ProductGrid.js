@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Axios from "axios"
 import UserContext from "../context/UserContext";
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductGrid(props) {
   const classes = useStyles();
   const { userData } = useContext(UserContext);
+  const [listed, setListed] = useState(false)
 
    const addToCart = async (e) => {
     e.preventDefault();
@@ -39,12 +40,22 @@ export default function ProductGrid(props) {
         url: "http://localhost:5000/user/addToCart",
         data: prodToAdd,
         headers: { "X-auth-token": userData.token },
-      });
-
-  
+      });  
     } catch (err) {}
   };
 
+  const addToWishlist = async (e) => {
+    e.preventDefault();
+    try {
+      const prodToAdd = { _id: props.buyerId, productId: props.id };
+      await Axios({
+        method: "put",
+        url: "http://localhost:5000/user/addToWishlist",
+        data: prodToAdd,
+        headers: { "X-auth-token": userData.token },
+      });  
+    } catch (err) {}
+  };
 
 
   return (
@@ -110,13 +121,14 @@ export default function ProductGrid(props) {
         </Grid>
         <Grid item xs={3}>
           <Button
-            variant="outlined"
+            variant={listed ? ("contained") : ("outlined")}
             color="secondary"
             className={classes.button}
             startIcon={<FavoriteBorderIcon />}
-            
+            onClick={e => {setListed(true); addToWishlist(e)}}            
           >
-            Add to Wishlist
+            {listed ? ("Added to your Wishlist!"): ("Add to Wishlist")}
+            
           </Button>
         </Grid>
       </Grid>

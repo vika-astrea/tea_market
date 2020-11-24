@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
+  const { userData } = useContext(UserContext);
 
   return (
     <Card className={classes.root} key={props.i}>
@@ -32,7 +34,7 @@ export default function MediaCard(props) {
           props.setMaterial(props.material);
           props.setAmount(props.amount);
           props.setId(props.id)
-          props.setBuyerId(props.buyerId)
+          props.setBuyerId(userData.user.id)
         }}
       >
         <CardMedia

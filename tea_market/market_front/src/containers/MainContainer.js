@@ -2,9 +2,9 @@ import { useQuery } from "react-query";
 import { GetAllProducts } from "../Queries";
 import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import ProductGrid from "../components/ProductGrid";
-import UserContext from "../context/UserContext";
+//import UserContext from "../context/UserContext";
 
 
 export default function MainContainer(props) {
@@ -25,7 +25,7 @@ export default function MainContainer(props) {
   }));
 
   
-  const { userData } = useContext(UserContext);
+ // const { userData } = useContext(UserContext);
 
   const [name, setName] = useState("");
   const [vendor, setVendor] = useState("");
@@ -87,7 +87,6 @@ export default function MainContainer(props) {
                     price={product.price}
                     amount={product.amount}
                     id={product._id}
-                    buyerId={userData.user.id}
                     setName={setName}
                     setVendor={setVendor}
                     setImg={setImg}

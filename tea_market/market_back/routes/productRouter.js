@@ -36,6 +36,17 @@ router.get("/userProducts", auth, async (req, res) => {
   res.json(products);
 });
 
+router.post("/cartProducts", auth, async (req, res) => {
+      const cartProducts = await Product.find({ _id: {$in:req.body._id} });
+  res.json(cartProducts);
+});
+
+router.post("/wishlistProducts", auth, async (req, res) => {
+  const wishlistProducts = await Product.find({ _id: {$in:req.body._id} });
+res.json(wishlistProducts);
+});
+
+
 router.get("/all", async (req, res) => {
   const products = await Product.find();
   res.json(products);

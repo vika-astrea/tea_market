@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [userData, setUserData] = useState({
+    isLoggedIn:false,
+    isLoading:true,
     token: undefined,
     user: undefined,
   });
@@ -26,11 +28,15 @@ function App() {
         const userRes = await Axios.get("http://localhost:5000/user/", {
           headers: { "x-auth-token": token },
         });
-        setUserData({ token, user: userRes.data });
-      }
-    };
+        setUserData({ token, user: userRes.data, isLoggedIn: true,
+          isLoading: false });
+         }
+    };    
     checkLoggedIn();
   }, []);
+
+
+
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

@@ -1,25 +1,62 @@
-import { Typography } from '@material-ui/core';
-import React, { useContext} from 'react';
-import NotLogged from '../components/NotLogged';
-import UserContext from '../context/UserContext'
+import { Typography } from "@material-ui/core";
+import axios from "axios";
+import React, { useContext } from "react";
+import { useQuery } from "react-query";
+import MediaCard from "../components/MediaCard";
+import UserContext from "../context/UserContext";
 
-export default function CartContainer () {
+export default function CartContainer() {
   const { userData } = useContext(UserContext);
 
-    return (
+  const cartIds = {
+    _id: ["5fbc0aed02b4d6b01ba71d2e", "5fbd59115d72f31c30493830"],
+  };
+
+  let cartData = JSON.stringify(cartIds);
+
+  let config = {
+    method: "post",
+    url: "http://localhost:5000/products/cartProducts",
+    headers: {
+      "x-auth-token": userData.token,
+      "Content-Type": "application/json",
+    },
+    data: cartData,
+  };
+
+  const GetCart = async () => {
+    const { data } = await axios(config);
+    return data;
+  };
+
+  const { isLoading, error, data } = useQuery("repoData", GetCart);
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  if (data === undefined) return "wait a sec";
+
+  return (
+    <React.Fragment>
       <>
-        {userData.user ? (<> <Typography variant="h3">
-          My Cart
-          
-          </Typography>
-          - lista de los productos productos
-          -Cada item de la lista tiene que tener nombre, vendor y precio
-          -abajo tiene que estar el precio final y el botón de Buy Now
-          -el boton tiene que tener el "fin de demo" pop up onClick
-          -My cart tiene que tener un numero indicando cuantos items hay en el cart
-          
-           </>):(<NotLogged/>)}
+        <Typography variant="h3">My Cart</Typography>
+        <div>
+          {data.map((product, _id) => {
+            return (
+              <MediaCard
+                key={product._id}
+                name={product.name}
+                type={product.type}
+                img={product.img}
+                amount={product.amount}
+                price={product.price}
+                vendor={product.vendor}
+              />
+            );
+          })}
+        </div>
       </>
-    )
-  
+    </React.Fragment>
+  );
 }

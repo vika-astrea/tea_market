@@ -56,7 +56,7 @@ export default function DashboardContainer() {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
-              {data.map((product)=>{return( <ListItem>
+              {data.map((product)=>{return( <ListItem key={product._id}>
                   <ListItemAvatar>
                     <Avatar>
                       <LabelIcon />

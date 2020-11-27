@@ -1,11 +1,9 @@
-import { useQuery } from "react-query";
-import { GetAllProducts } from "../Queries";
-import MediaCard from "../components/MediaCard";
 import { GridList, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
+import { useQuery } from "react-query";
+import MediaCard from "../components/MediaCard";
 import ProductGrid from "../components/ProductGrid";
-//import UserContext from "../context/UserContext";
-
+import { GetAllProducts } from "../Queries";
 
 export default function MainContainer(props) {
   const useStyles = makeStyles((theme) => ({
@@ -24,8 +22,6 @@ export default function MainContainer(props) {
     },
   }));
 
-  
- // const { userData } = useContext(UserContext);
 
   const [name, setName] = useState("");
   const [vendor, setVendor] = useState("");
@@ -34,8 +30,8 @@ export default function MainContainer(props) {
   const [type, setType] = useState("");
   const [material, setMaterial] = useState("");
   const [amount, setAmount] = useState("");
-  const [id, setId]= useState("")
-  const [buyerId, setBuyerId]= useState("")
+  const [id, setId] = useState("");
+  const [buyerId, setBuyerId] = useState("");
 
   const classes = useStyles();
 

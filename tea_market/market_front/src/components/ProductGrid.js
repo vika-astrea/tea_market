@@ -4,9 +4,9 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React, {useContext, useState} from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Axios from "axios"
+import Axios from "axios";
+import React, { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductGrid(props) {
   const classes = useStyles();
   const { userData } = useContext(UserContext);
-  const [listed, setListed] = useState(false)
+  const [listed, setListed] = useState(false);
 
-   const addToCart = async (e) => {
+  const addToCart = async (e) => {
     e.preventDefault();
     try {
       const prodToAdd = { _id: props.buyerId, productId: props.id };
@@ -40,7 +40,7 @@ export default function ProductGrid(props) {
         url: "http://localhost:5000/user/addToCart",
         data: prodToAdd,
         headers: { "X-auth-token": userData.token },
-      });  
+      });
     } catch (err) {}
   };
 
@@ -53,10 +53,9 @@ export default function ProductGrid(props) {
         url: "http://localhost:5000/user/addToWishlist",
         data: prodToAdd,
         headers: { "X-auth-token": userData.token },
-      });  
+      });
     } catch (err) {}
   };
-
 
   return (
     <div className={classes.root}>
@@ -76,7 +75,7 @@ export default function ProductGrid(props) {
               props.setMaterial("");
               props.setAmount("");
               props.setId("");
-              props.setBuyerId("")
+              props.setBuyerId("");
             }}
           >
             Back to catalog
@@ -113,22 +112,24 @@ export default function ProductGrid(props) {
             variant="contained"
             color="primary"
             className={classes.button}
-            startIcon={<ShoppingCartIcon/>}
+            startIcon={<ShoppingCartIcon />}
             onClick={addToCart}
-            >
+          >
             Add to Cart
           </Button>
         </Grid>
         <Grid item xs={3}>
           <Button
-            variant={listed ? ("contained") : ("outlined")}
+            variant={listed ? "contained" : "outlined"}
             color="secondary"
             className={classes.button}
             startIcon={<FavoriteBorderIcon />}
-            onClick={e => {setListed(true); addToWishlist(e)}}            
+            onClick={(e) => {
+              setListed(true);
+              addToWishlist(e);
+            }}
           >
-            {listed ? ("Added to your Wishlist!"): ("Add to Wishlist")}
-            
+            {listed ? "Added to your Wishlist!" : "Add to Wishlist"}
           </Button>
         </Grid>
       </Grid>

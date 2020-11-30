@@ -9,7 +9,7 @@ function App() {
     isLoggedIn:false,
     isLoading:true,
     token: undefined,
-    user: undefined,
+    user: "",
   });
 
   useEffect(() => {
@@ -34,9 +34,6 @@ function App() {
     };    
     checkLoggedIn();
   }, []);
-
-
-
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

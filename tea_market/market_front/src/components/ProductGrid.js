@@ -4,10 +4,10 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Axios from "axios";
 import React, { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
+import AddToCartButton from "./buttons/AddToCartButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,18 +31,7 @@ export default function ProductGrid(props) {
   const { userData } = useContext(UserContext);
   const [listed, setListed] = useState(false);
 
-  const addToCart = async (e) => {
-    e.preventDefault();
-    try {
-      const prodToAdd = { _id: props.buyerId, productId: props.id };
-      await Axios({
-        method: "put",
-        url: "http://localhost:5000/user/addToCart",
-        data: prodToAdd,
-        headers: { "X-auth-token": userData.token },
-      });
-    } catch (err) {}
-  };
+
 
   const addToWishlist = async (e) => {
     e.preventDefault();
@@ -108,15 +97,7 @@ export default function ProductGrid(props) {
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           {" "}
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            startIcon={<ShoppingCartIcon />}
-            onClick={addToCart}
-          >
-            Add to Cart
-          </Button>
+          <AddToCartButton buyerId={props.buyerId}  id={props.id}/>
         </Grid>
         <Grid item xs={3}>
           <Button

@@ -7,7 +7,7 @@ import EmojiFoodBeverageIcon from "@material-ui/icons/EmojiFoodBeverage";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import AuthButtons from "./AuthButtons";
+import AuthButtons from "./buttons/AuthButtons";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

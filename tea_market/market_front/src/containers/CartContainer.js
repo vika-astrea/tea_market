@@ -85,7 +85,7 @@ export default function CartContainer() {
                       <CheckCircleIcon color="primary" />
                     </ListItemAvatar>
                     <ListItemText
-                      primary={product.name}
+                      primary={`${product.name} - by ${product.vendor}`}
                       secondary={
                         secondary ? "Secondary text" : `$ ${product.price}`
                       }

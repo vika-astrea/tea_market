@@ -99,7 +99,7 @@ router.post("/tokenIsValid", async (req,res)=>{
 
 //Updating User Info
 
-//Add to cart
+//Cart actions
 router.put("/addToCart",auth, async (req, res) => {
   try{
     const {_id, productId} = req.body;
@@ -113,7 +113,21 @@ router.put("/addToCart",auth, async (req, res) => {
   }
 })
 
-//Add to Wishlist
+router.patch("/removeFromCart",auth,async(req,res)=>{
+  try{
+    const {_id, productId} = req.body;
+
+    const removedProduct = await User.updateOne({ _id: _id },
+      { $pull: { cart: productId } })
+
+      return res.json(removedProduct)
+
+  }catch(err){
+    res.status(500).json({error: err.message})
+  }
+})
+
+//Wishlist actions
 
 router.put("/addToWishlist",auth, async (req, res) => {
   try{
@@ -123,6 +137,20 @@ router.put("/addToWishlist",auth, async (req, res) => {
       { $addToSet: { wishlist: productId } })
 
       return res.json(newWishlistProduct)
+  }catch(err){
+    res.status(500).json({error: err.message})
+  }
+})
+
+router.patch("/removeFromWishlist",auth,async(req,res)=>{
+  try{
+    const {_id, productId} = req.body;
+
+    const removedProduct = await User.updateOne({ _id: _id },
+      { $pull: { wishlist: productId } })
+
+      return res.json(removedProduct)
+
   }catch(err){
     res.status(500).json({error: err.message})
   }

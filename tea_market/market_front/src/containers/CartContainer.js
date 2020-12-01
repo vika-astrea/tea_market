@@ -1,18 +1,19 @@
 import {
   Button,
-  Divider, IconButton,
+  Divider,
   List,
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
-  ListItemText, Typography
+  ListItemText,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
+import RemoveCartButton from "../components/buttons/RemoveCartButton";
 import NotLogged from "../components/NotLogged";
 import UserContext from "../context/UserContext";
 
@@ -91,9 +92,7 @@ export default function CartContainer() {
                       }
                     />
                     <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="remove">
-                        <HighlightOffIcon color="secondary" />
-                      </IconButton>
+                      <RemoveCartButton productId={product._id} _id={userData.user.id} token={userData.token} />
                     </ListItemSecondaryAction>
                   </ListItem>
                 );

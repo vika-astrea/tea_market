@@ -76,6 +76,7 @@ export default function WishlistContainer() {
                   price={product.price}
                   amount={product.amount}
                   id={product._id}
+                  buyerId={userData.user.id}
                 />
               );
             })}

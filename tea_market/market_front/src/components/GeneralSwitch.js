@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import CartContainer from "../containers/CartContainer";
 import DashboardContainer from "../containers/DashboardContainer";
+import EndOfDemo from "../containers/EndOfDemo";
 import LogInContainer from "../containers/LogInContainer";
 import MainContainer from "../containers/MainContainer";
 import RegisterContainer from "../containers/RegisterContainer";
@@ -38,6 +39,9 @@ export default function GeneralSwitch(props) {
       </Route>
       <Route path="/wishlist">
         <WishlistContainer />
+      </Route>
+      <Route path="/end">
+        <EndOfDemo />
       </Route>
     </Switch>
   );

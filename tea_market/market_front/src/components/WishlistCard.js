@@ -46,7 +46,7 @@ export default function WishlistCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <AddToCartButton/>
+      <AddToCartButton  buyerId={props.buyerId}  id={props.id}/>
       <br/>
       <br/>
 

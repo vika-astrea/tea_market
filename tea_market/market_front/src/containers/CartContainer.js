@@ -16,9 +16,13 @@ import { useQuery } from "react-query";
 import RemoveCartButton from "../components/buttons/RemoveCartButton";
 import NotLogged from "../components/NotLogged";
 import UserContext from "../context/UserContext";
+import { useHistory } from "react-router-dom";
+
 
 export default function CartContainer() {
   const { userData } = useContext(UserContext);
+  let history = useHistory();
+
 
   const cartIds = {
     _id: userData.user.cart,
@@ -41,6 +45,7 @@ export default function CartContainer() {
     return data;
   };
 
+
   const [dense] = useState(false);
   const [secondary] = useState(false);
 
@@ -57,6 +62,9 @@ export default function CartContainer() {
     },
   }));
   const classes = useStyles();
+  function handleEnd() {
+    history.push("/end");
+  };
 
   const { isLoading, error, data } = useQuery("repoData", GetCart);
 
@@ -104,7 +112,7 @@ export default function CartContainer() {
             <Typography variant="h4">Total : $ {totalPrice}</Typography>
             <br />
 
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleEnd}>
               Go to Check Out
             </Button>
           </div>

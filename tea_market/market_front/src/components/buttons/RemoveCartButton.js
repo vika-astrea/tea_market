@@ -7,8 +7,7 @@ import { RemoveFromCart } from "../../Queries";
 export default function RemoveCartButton(props) {
   const [mutate] = useMutation(RemoveFromCart);
 
-  const remove = async (e) => {
-    e.preventDefault();
+  const handleRemove = async (e) => {
     try {
       await mutate({
         _id: props._id,
@@ -19,7 +18,7 @@ export default function RemoveCartButton(props) {
   };
 
   return (
-    <IconButton edge="end" aria-label="remove" onClick={remove}>
+    <IconButton edge="end" aria-label="remove" onClick={handleRemove}>
       <HighlightOffIcon color="secondary" />
     </IconButton>
   );

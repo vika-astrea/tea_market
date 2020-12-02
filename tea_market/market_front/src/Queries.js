@@ -22,6 +22,25 @@ const{data}= await axios({
   headers:{"X-auth-token":info.token},
   data:info
 });
-return data
+return data}
 
+export const RemoveFromWishlist = async(info)=>{
+  const{data}= await axios({
+    method:"patch",
+    url:"http://localhost:5000/user/removeFromWishlist",
+    headers:{"X-auth-token":info.token},
+    data:info
+  });
+  return data
+
+}
+
+export const DeleteProduct = async(info)=>{
+  const {data} = await axios({
+    method:"delete",
+    url: "http://localhost:5000/products/deleteProduct",
+    headers:{"X-auth-token":info.token},
+    data:info
+  });
+  return data
 }

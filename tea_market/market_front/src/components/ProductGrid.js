@@ -32,7 +32,6 @@ export default function ProductGrid(props) {
   const [listed, setListed] = useState(false);
 
 
-
   const addToWishlist = async (e) => {
     e.preventDefault();
     try {

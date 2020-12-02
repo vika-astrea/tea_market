@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React from "react";
 import AddToCartButton from "./buttons/AddToCartButton";
+import { useMutation } from "react-query";
+import { RemoveFromWishlist } from "../Queries";
+
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +24,19 @@ const useStyles = makeStyles({
 
 export default function WishlistCard(props) {
   const classes = useStyles();
+
+  const [mutate] = useMutation(RemoveFromWishlist);
+
+  const handleRemove = async (e) => {
+    e.preventDefault();
+    try {
+      await mutate({
+        _id: props.buyerId,
+        productId: props.id,
+        token: props.token,
+      });
+    } catch (error) {}
+  };
 
   return (
     <Card className={classes.root} key={props.i}>
@@ -54,6 +70,7 @@ export default function WishlistCard(props) {
         color="secondary"
         variant="outlined"
         startIcon={<HighlightOffIcon />}
+        onClick={handleRemove}
       >
         Remove from Wishlist
       </Button>

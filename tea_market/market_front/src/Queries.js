@@ -44,3 +44,13 @@ export const DeleteProduct = async(info)=>{
   });
   return data
 }
+
+export const UpdateProduct =  async(info)=>{
+  const {data} = await axios({
+    method:"patch",
+    url: "http://localhost:5000/products/updateProduct",
+    headers:{"X-auth-token":info.token},
+    data:info
+  });
+  return data
+}

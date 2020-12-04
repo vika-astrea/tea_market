@@ -61,5 +61,31 @@ router.delete("/deleteProduct", auth, async (req, res) => {
   }
 });
 
+router.patch("/updateProduct",auth, async( req, res) => {
+  try{
+    const {_id, name, vendor, price, img, type, material, amount } = req.body;
+        //validation
+        if (!name || !price || !img || !type || !material || !amount)
+        return res.status(400).json({ msg: "Not all fields have been entered." });
+  
+      if (price < 0)
+        return res.status(400).json({ msg: "Price can't be a negative number." });
+
+      const updatedProduct = await Product.replaceOne({_id: _id},{
+        name: name,
+        vendor: vendor,
+        price: price,
+        img: img,  
+        type: type,
+        material: material,
+        amount:amount,
+        userId: req.user,
+      });
+      res.json(updatedProduct);
+
+  }catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
 
 module.exports = router;

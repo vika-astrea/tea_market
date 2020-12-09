@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
 const User = require("../models/userModel");
+const Product = require("../models/productModel");
 const jwt = require("jsonwebtoken");
 
 //register
@@ -80,10 +81,22 @@ router.post("/login", async (req, res) => {
 
 router.delete("/deleteUser", auth, async (req, res) => {
   try {
+    const { password } = req.body;
+    const user = await User.findById(req.user);
+
+    //validation 
+    if (!password)
+      return res.status(400).json({ msg: "Please, enter your password." });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Incorrect password" });
+
+    const deletedProducts = await Product.deleteMany({ userId: req.user });
+    res.json(deletedProducts);
     const deletedUser = await User.findByIdAndDelete(req.user);
     res.json(deletedUser);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message }); 
   }
 });
 

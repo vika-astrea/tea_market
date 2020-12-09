@@ -88,4 +88,15 @@ router.patch("/updateProduct",auth, async( req, res) => {
   }
 })
 
+//delete all products from a user
+router.delete("/deleteUserProducts", auth, async (req, res) => {
+  try {
+    const deletedProducts = await Product.deleteMany({ userId: req.body.userId });
+    res.json(deletedProducts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 module.exports = router;

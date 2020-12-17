@@ -98,5 +98,21 @@ router.delete("/deleteUserProducts", auth, async (req, res) => {
   }
 });
 
+//Get product by id
+
+router.post("/product", async (req, res) => {
+  const {id} = req.body;
+  const product = await Product.findById(id);
+  res.json({
+    name: product.name,
+    vendor: product.vendor,
+    price: product.price ,
+    img: product.img,  
+    type: product.type,
+    material: product.material,
+    amount:product.amount,    
+  });
+});
+
 
 module.exports = router;

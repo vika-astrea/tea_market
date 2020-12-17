@@ -54,6 +54,7 @@ export default function ClippedDrawer() {
   const [openPrice, setOpenPrice] = useState(false);
   const [func, setFunction] = useState();
   const [type, setType] = useState("");
+  const [id, setId]=useState("");
 
   let history = useHistory();
 
@@ -74,7 +75,7 @@ export default function ClippedDrawer() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <ToolbarApp setType={setType} />
+        <ToolbarApp setId={setId} setType={setType} type={type}/>
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -157,7 +158,7 @@ export default function ClippedDrawer() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <GeneralSwitch func={func} type={type} />
+        <GeneralSwitch func={func} type={type} id={id} setId={setId} />
       </main>
     </div>
   );

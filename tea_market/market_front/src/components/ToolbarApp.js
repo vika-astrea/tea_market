@@ -72,7 +72,10 @@ export default function ToolbarApp(props) {
   let history = useHistory();
 
   function handleMainClick() {
+    console.log(props.type);
     props.setType("");
+    console.log(props.type);
+    props.setId("");    
     history.push("/home");
     
   }

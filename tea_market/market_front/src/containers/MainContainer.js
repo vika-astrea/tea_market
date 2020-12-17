@@ -1,8 +1,7 @@
 import { GridList, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import MediaCard from "../components/MediaCard";
-import ProductGrid from "../components/ProductGrid";
 import { GetAllProducts } from "../Queries";
 
 export default function MainContainer(props) {
@@ -21,17 +20,6 @@ export default function MainContainer(props) {
       alignContent: "center",
     },
   }));
-
-
-  const [name, setName] = useState("");
-  const [vendor, setVendor] = useState("");
-  const [price, setPrice] = useState("");
-  const [img, setImg] = useState("");
-  const [type, setType] = useState("");
-  const [material, setMaterial] = useState("");
-  const [amount, setAmount] = useState("");
-  const [id, setId] = useState("");
-  const [buyerId, setBuyerId] = useState("");
 
   const classes = useStyles();
 
@@ -52,75 +40,42 @@ export default function MainContainer(props) {
 
   if (error) return "An error has occurred: " + error.message;
 
-  if (name === "" && vendor === "") {
-    return (
-      <React.Fragment>
-        <div className={classes.root}>
-          <GridList cellHeight={180} className={classes.gridList}>
-            {data
-              .filter(filterByType)
-              .sort(function (a, b) {
-                if (props.func === true) {
-                  return parseFloat(a.price) - parseFloat(b.price);
-                }
-                if (props.func === false) {
-                  return parseFloat(b.price) - parseFloat(a.price);
-                } else {
-                  return undefined;
-                }
-              })
-              .map((product, i) => {
-                return (
-                  <MediaCard
-                    key={i}
-                    i={i}
-                    product={product}
-                    img={product.img}
-                    name={product.name}
-                    vendor={product.vendor}
-                    type={product.type}
-                    material={product.material}
-                    price={product.price}
-                    amount={product.amount}
-                    id={product._id}
-                    setName={setName}
-                    setVendor={setVendor}
-                    setImg={setImg}
-                    setPrice={setPrice}
-                    setType={setType}
-                    setMaterial={setMaterial}
-                    setAmount={setAmount}
-                    setId={setId}
-                    setBuyerId={setBuyerId}
-                  />
-                );
-              })}
-          </GridList>
-        </div>
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <ProductGrid
-        img={img}
-        name={name}
-        vendor={vendor}
-        type={type}
-        material={material}
-        price={price}
-        amount={amount}
-        id={id}
-        buyerId={buyerId}
-        setName={setName}
-        setVendor={setVendor}
-        setImg={setImg}
-        setPrice={setPrice}
-        setType={setType}
-        setMaterial={setMaterial}
-        setAmount={setAmount}
-        setId={setId}
-        setBuyerId={setBuyerId}
-      />
-    );
-  }
+  return (
+    <React.Fragment>
+      <div className={classes.root}>
+        <GridList cellHeight={180} className={classes.gridList}>
+          {data
+            .filter(filterByType)
+            .sort(function (a, b) {
+              if (props.func === true) {
+                return parseFloat(a.price) - parseFloat(b.price);
+              }
+              if (props.func === false) {
+                return parseFloat(b.price) - parseFloat(a.price);
+              } else {
+                return undefined;
+              }
+            })
+            .map((product, i) => {
+              return (
+                <MediaCard
+                  key={i}
+                  i={i}
+                  product={product}
+                  img={product.img}
+                  name={product.name}
+                  vendor={product.vendor}
+                  type={product.type}
+                  material={product.material}
+                  price={product.price}
+                  amount={product.amount}
+                  id={product._id}
+                  setId={props.setId}
+                />
+              );
+            })}
+        </GridList>
+      </div>
+    </React.Fragment>
+  );
 }

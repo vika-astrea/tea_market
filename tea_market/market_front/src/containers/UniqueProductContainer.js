@@ -4,10 +4,14 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import Axios from "axios";
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
-import AddToCartButton from "./buttons/AddToCartButton";
+import { useQuery } from "react-query";
+import AddToCartButton from "../components/buttons/AddToCartButton";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,17 +30,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductGrid(props) {
+
+export default function UniqueProductContainer (props) {
   const classes = useStyles();
   const { userData } = useContext(UserContext);
-  const [listed, setListed] = useState(false);
 
 
+  
   const addToWishlist = async (e) => {
     e.preventDefault();
     try {
       const prodToAdd = { _id: props.buyerId, productId: props.id };
-      await Axios({
+      await axios({
         method: "put",
         url: "http://localhost:5000/user/addToWishlist",
         data: prodToAdd,
@@ -45,8 +50,29 @@ export default function ProductGrid(props) {
     } catch (err) {}
   };
 
-  return (
-    <div className={classes.root}>
+//QUERY
+
+let config = {
+  method: "post",
+  url: "http://localhost:5000/products/product",
+  data: {id: props.id},
+};
+
+const GetProduct = async () => {
+  const { data } = await axios(config);
+  return data;
+};
+
+const { isLoading, error, data } = useQuery("repoData", GetProduct);
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  if (data === undefined) return "wait a sec";
+
+    return (
+      <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid itm xs={12}>
           <Button
@@ -61,7 +87,7 @@ export default function ProductGrid(props) {
         </Grid>
         <Grid item xs={6}>
           <img
-            src={props.img}
+            src={data.img}
             className={classes.media}
             alt="product on sale"
           />
@@ -69,16 +95,16 @@ export default function ProductGrid(props) {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Typography gutterBottom variant="h4" component="h1">
-              {props.name}
+              {data.name}
             </Typography>
             <Typography variant="h5">
-              {props.type} ({props.material})
+              {data.type} ({data.material})
             </Typography>
-            <Typography variant="h8">by {props.vendor}</Typography>
+            <Typography variant="h8">by {data.vendor}</Typography>
             <br />
             <br />
             <Typography variant="h4">
-              ${props.price} for {props.amount}
+              ${data.price} for {data.amount}
             </Typography>
           </Paper>
         </Grid>
@@ -86,23 +112,23 @@ export default function ProductGrid(props) {
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           {" "}
-          <AddToCartButton buyerId={props.buyerId}  id={props.id}/>
+          <AddToCartButton buyerId={userData.user.id}  id={props.id}/>
         </Grid>
         <Grid item xs={3}>
           <Button
-            variant={listed ? "contained" : "outlined"}
+            variant={ "contained" }
             color="secondary"
             className={classes.button}
             startIcon={<FavoriteBorderIcon />}
             onClick={(e) => {
-              setListed(true);
               addToWishlist(e);
             }}
           >
-            {listed ? "Added to your Wishlist!" : "Add to Wishlist"}
+           
           </Button>
         </Grid>
       </Grid>
     </div>
-  );
+    )
+  
 }

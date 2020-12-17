@@ -8,16 +8,17 @@ import MainContainer from "../containers/MainContainer";
 import RegisterContainer from "../containers/RegisterContainer";
 import SellProductContainer from "../containers/SellProductContainer";
 import SettingsContainer from "../containers/SettingsContainer";
+import UniqueProductContainer from "../containers/UniqueProductContainer";
 import WishlistContainer from "../containers/WishlistContainer";
 
 export default function GeneralSwitch(props) {
   return (
     <Switch>
       <Route path="/home">
-        <MainContainer type={props.type} func={props.func} />
+        <MainContainer type={props.type} func={props.func} setId={props.setId}/>
       </Route>
       <Route exact path="/">
-        <MainContainer type={props.type} func={props.func} />
+        <MainContainer type={props.type} func={props.func} sertId={props.setId} />
       </Route>
       <Route path="/login">
         <LogInContainer />
@@ -42,6 +43,9 @@ export default function GeneralSwitch(props) {
       </Route>
       <Route path="/end">
         <EndOfDemo />
+      </Route>
+      <Route path="/product">
+        <UniqueProductContainer id={props.id}/>
       </Route>
     </Switch>
   );

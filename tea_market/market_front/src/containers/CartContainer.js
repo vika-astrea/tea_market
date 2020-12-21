@@ -66,7 +66,7 @@ export default function CartContainer() {
     history.push("/end");
   };
 
-  const { isLoading, error, data } = useQuery("repoData", GetCart);
+  const { isLoading, error, data } = useQuery('cart', GetCart);
 
   if (isLoading) return "Loading...";
 

@@ -2,8 +2,9 @@ import axios from "axios";
 
 
 export const GetAllProducts= async ()=>{
+  try{
   const{data}= await axios.get("http://localhost:5000/products/all");
-  return data
+  return data}catch(err){}
 }
 
 export const GetUserProducts= async (key)=>{

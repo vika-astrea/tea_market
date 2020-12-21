@@ -54,10 +54,7 @@ export default function NavAccount() {
       {userData.user ? (
         <>
           <ListItem>
-            {" "}
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
+            {" "} 
             <ListItemText>Welcome {userData.user.displayName} !</ListItemText>
           </ListItem>
           <ListItem button onClick={handleCartClick}>

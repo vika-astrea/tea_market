@@ -1,11 +1,19 @@
 import { IconButton } from "@material-ui/core";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryCache } from "react-query";
 import { RemoveFromCart } from "../../Queries";
 
 export default function RemoveCartButton(props) {
-  const [mutate] = useMutation(RemoveFromCart);
+  const queryClient = useQueryCache()
+
+  const [mutate] = useMutation(RemoveFromCart,{
+    onSuccess: () => {
+      queryClient.invalidateQueries('cart');
+      window.location.reload(false);
+
+      },
+  });
 
   const handleRemove = async (e) => {
     try {

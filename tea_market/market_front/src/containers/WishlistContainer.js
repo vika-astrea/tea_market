@@ -49,7 +49,7 @@ export default function WishlistContainer() {
 
   const classes = useStyles();
 
-  const { isLoading, error, data } = useQuery("repoData", GetWishlist);
+  const { isLoading, error, data } = useQuery("wish", GetWishlist);
 
   if (isLoading) return "Loading...";
 

@@ -9,6 +9,8 @@ import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
 import { useQuery } from "react-query";
 import AddToCartButton from "../components/buttons/AddToCartButton";
+import { useHistory } from "react-router-dom";
+
 
 
 
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UniqueProductContainer (props) {
   const classes = useStyles();
+  let history = useHistory();
   const { userData } = useContext(UserContext);
 
 
@@ -63,7 +66,7 @@ const GetProduct = async () => {
   return data;
 };
 
-const { isLoading, error, data } = useQuery("repoData", GetProduct);
+const { isLoading, error, data } = useQuery("unique", GetProduct);
 
   if (isLoading) return "Loading...";
 
@@ -80,6 +83,11 @@ const { isLoading, error, data } = useQuery("repoData", GetProduct);
             color="primary"
             className={classes.button}
             startIcon={<ArrowBackIcon />}
+            onClick={(e) => {
+              props.setType("");
+              props.setId("");
+              history.push("/home");
+            }}
 
           >
             Back to catalog
@@ -124,7 +132,7 @@ const { isLoading, error, data } = useQuery("repoData", GetProduct);
               addToWishlist(e);
             }}
           >
-           
+           Add to Wishlist
           </Button>
         </Grid>
       </Grid>

@@ -34,7 +34,7 @@ export default function MainContainer(props) {
     }
   };
 
-  const { isLoading, error, data } = useQuery("repoData", GetAllProducts);
+  const { isLoading, error, data } = useQuery("main", GetAllProducts);
 
   if (isLoading) return "Loading...";
 

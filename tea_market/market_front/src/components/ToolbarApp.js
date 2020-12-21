@@ -71,20 +71,15 @@ export default function ToolbarApp(props) {
   const classes = useStyles();
   let history = useHistory();
 
-  function handleMainClick() {
-    console.log(props.type);
-    props.setType("");
-    console.log(props.type);
-    props.setId("");    
-    history.push("/home");
-    
-  }
-
   return (
     <div className={classes.grow}>
       <Toolbar>
         <div
-          onClick={handleMainClick}
+          onClick={(e) => {
+            props.setType("");
+            props.setId("");
+            history.push("/home");
+          }}
           style={{ display: "flex", cursor: "pointer" }}
         >
           <Typography className={classes.title} variant="h6" noWrap>

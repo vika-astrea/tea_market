@@ -158,7 +158,7 @@ export default function ClippedDrawer() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <GeneralSwitch func={func} type={type} id={id} setId={setId} />
+        <GeneralSwitch func={func} type={type} id={id} setId={setId} setType={setType}/>
       </main>
     </div>
   );

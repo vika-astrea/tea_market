@@ -6,7 +6,7 @@ import NotLogged from "../components/NotLogged";
 import FirstRow from "../components/sell product components/FirstRow";
 import SecondRow from "../components/sell product components/SecondRow";
 import UserContext from "../context/UserContext";
-import { useMutation, queryCache, } from "react-query";
+import { useMutation } from "react-query";
 import { UpdateProduct } from "../Queries";
 import { useHistory } from "react-router-dom";
 
@@ -34,11 +34,7 @@ export default function EditingProduct(props) {
   const classes = useStyles();
 
   //Query
-  const [mutate] = useMutation(UpdateProduct, {
-    onSuccess: () => {
-      queryCache.invalidateQueries();
-    },
-  });
+  const [mutate] = useMutation(UpdateProduct);
 
   const editHandler = async (e) => {
     e.preventDefault();
@@ -53,9 +49,11 @@ export default function EditingProduct(props) {
         material: material,
         amount: amount,
         token: userData.token,
-      });
-      history.push("/dash");
-    } catch (err) {
+      }); 
+      
+        history.push("/dash");
+ 
+        } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
   };

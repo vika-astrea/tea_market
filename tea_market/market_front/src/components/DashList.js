@@ -50,19 +50,21 @@ export default function DashList(props) {
                   primary={product.name}
                   secondary={secondary ? "Secondary text" : null}
                 />
+                <DeleteProductButton token={props.token} _id={product._id} />
                 <ListItemSecondaryAction>
-                  <DeleteProductButton token={props.token} _id={product._id} />
                   <IconButton
                     edge="end"
                     aria-label="edit"
-                    onClick={(e) =>    { props.setListing(false);
+                    onClick={(e) => {
+                      props.setListing(false);
                       props.setType(product.type);
                       props.setMaterial(product.material);
                       props.setName(product.name);
                       props.setAmount(product.amount);
                       props.setPrice(product.price);
                       props.setImg(product.img);
-                      props.setId(product._id)}}
+                      props.setId(product._id);
+                    }}
                   >
                     <EditIcon />
                   </IconButton>

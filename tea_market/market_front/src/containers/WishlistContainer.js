@@ -29,6 +29,7 @@ export default function WishlistContainer() {
   const wishlistIds = {
     _id: userData.user.wishlist,
   };
+  console.log(wishlistIds)
 
   let wishlistData = JSON.stringify(wishlistIds);
 

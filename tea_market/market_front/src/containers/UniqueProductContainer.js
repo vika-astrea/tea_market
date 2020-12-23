@@ -11,6 +11,7 @@ import { useQuery, useMutation } from "react-query";
 import AddToCartButton from "../components/buttons/AddToCartButton";
 import { useHistory } from "react-router-dom";
 import { RemoveFromWishlist } from "../Queries";
+import ProductContext from "../context/ProductContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,12 +34,13 @@ export default function UniqueProductContainer(props) {
   const classes = useStyles();
   let history = useHistory();
   const { userData } = useContext(UserContext);
+  const {productId, setProductId} = useContext(ProductContext) 
   const [mutate] = useMutation(RemoveFromWishlist);
 
   const addToWishlist = async (e) => {
     e.preventDefault();
     try {
-      const prodToAdd = { _id: userData.user.id, productId: props.id };
+      const prodToAdd = { _id: userData.user.id, productId: productId };
       await axios({
         method: "put",
         url: "http://localhost:5000/user/addToWishlist",
@@ -53,7 +55,7 @@ export default function UniqueProductContainer(props) {
     try {
       await mutate({
         _id: userData.user.id,
-        productId: props.id,
+        productId: productId,
         token: userData.token,
       });
     } catch (error) {}
@@ -63,7 +65,7 @@ export default function UniqueProductContainer(props) {
   let config = {
     method: "post",
     url: "http://localhost:5000/products/product",
-    data: { id: props.id },
+    data: { id: productId },
   };
 
   const GetProduct = async () => {
@@ -82,7 +84,7 @@ export default function UniqueProductContainer(props) {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid itm xs={12}>
+        <Grid item xs={12}>
           <Button
             variant="outlined"
             color="primary"
@@ -90,7 +92,7 @@ export default function UniqueProductContainer(props) {
             startIcon={<ArrowBackIcon />}
             onClick={(e) => {
               props.setType("");
-              props.setId("");
+              setProductId("");
               history.push("/home");
             }}
           >
@@ -120,7 +122,7 @@ export default function UniqueProductContainer(props) {
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           {" "}
-          <AddToCartButton buyerId={userData.user.id} id={props.id} />
+          <AddToCartButton/>
         </Grid>
         <Grid item xs={3}>
           {userData.user.wishlist.includes(props.id) ? (

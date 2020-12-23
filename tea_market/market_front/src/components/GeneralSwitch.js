@@ -15,10 +15,10 @@ export default function GeneralSwitch(props) {
   return (
     <Switch>
       <Route path="/home">
-        <MainContainer type={props.type} func={props.func} setId={props.setId}/>
+        <MainContainer type={props.type} func={props.func} />
       </Route>
       <Route exact path="/">
-        <MainContainer type={props.type} func={props.func} setId={props.setId} />
+        <MainContainer type={props.type} func={props.func}  />
       </Route>
       <Route path="/login">
         <LogInContainer />
@@ -45,7 +45,7 @@ export default function GeneralSwitch(props) {
         <EndOfDemo />
       </Route>
       <Route path="/product">
-        <UniqueProductContainer id={props.id} setType={props.setType} setId={props.setId}/>
+        <UniqueProductContainer  setType={props.setType} />
       </Route>
     </Switch>
   );

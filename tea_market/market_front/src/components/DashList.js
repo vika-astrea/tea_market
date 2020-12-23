@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Avatar,
   IconButton,
@@ -12,10 +12,16 @@ import LabelIcon from "@material-ui/icons/Label";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteProductButton from "./buttons/DeleteProductButton";
 import { makeStyles } from "@material-ui/core/styles";
+import ProductContext from "../context/ProductContext";
+import { useHistory } from "react-router-dom";
+
 
 export default function DashList(props) {
   const [dense] = useState(false);
   const [secondary] = useState(false);
+  const { setProductId } = useContext(ProductContext);
+  let history = useHistory();
+
 
   //Styling
   const useStyles = makeStyles((theme) => ({
@@ -40,7 +46,12 @@ export default function DashList(props) {
         <List dense={dense}>
           {props.data.map((product) => {
             return (
-              <ListItem key={product._id}>
+              <ListItem
+                key={product._id}
+                button="true"
+                onClick={(e)=>{setProductId(product._id);
+                  history.push("/product")}}
+              >
                 <ListItemAvatar>
                   <Avatar>
                     <LabelIcon />

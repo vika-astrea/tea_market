@@ -62,7 +62,7 @@ export default function NavAccount() {
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText>My Cart</ListItemText>
+            <ListItemText>My Cart ({userData.user.cart.length})</ListItemText>
           </ListItem>
           <ListItem button onClick={handleWishClick}>
             {" "}

@@ -1,6 +1,7 @@
 import "./App.css";
 import ClippedDrawer from "./components/ClippedDrawer";
 import UserContext from "./context/UserContext";
+import ProductContext from "./context/ProductContext"
 import Axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -11,6 +12,8 @@ function App() {
     token: undefined,
     user: "",
   });
+
+  const [productId, setProductId]= useState("")
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -36,11 +39,13 @@ function App() {
   }, []);
 
   return (
+    <ProductContext.Provider value={{productId, setProductId}}>
     <UserContext.Provider value={{ userData, setUserData }}>
       <div className="App">
         <ClippedDrawer />
       </div>
     </UserContext.Provider>
+    </ProductContext.Provider>
   );
 }
 

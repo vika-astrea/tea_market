@@ -77,7 +77,6 @@ export default function ToolbarApp(props) {
         <div
           onClick={(e) => {
             props.setType("");
-            props.setId("");
             history.push("/home");
           }}
           style={{ display: "flex", cursor: "pointer" }}

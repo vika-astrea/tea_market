@@ -4,8 +4,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import {React, useContext} from "react";
 import { useHistory } from "react-router-dom";
+import ProductContext from "../context/ProductContext"
 
 
 const useStyles = makeStyles({
@@ -21,6 +22,8 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   let history = useHistory();
+  const { setProductId } = useContext(ProductContext);
+
 
 
  
@@ -30,7 +33,7 @@ export default function MediaCard(props) {
       <CardActionArea
         button 
         onClick={(e)=>{
-          props.setId(props.id);
+          setProductId(props.id);
           history.push("/product")}}      
       >
         <CardMedia

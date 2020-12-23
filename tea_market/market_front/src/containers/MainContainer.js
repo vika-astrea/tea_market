@@ -70,7 +70,6 @@ export default function MainContainer(props) {
                   price={product.price}
                   amount={product.amount}
                   id={product._id}
-                  setId={props.setId}
                 />
               );
             })}

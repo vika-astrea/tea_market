@@ -6,9 +6,10 @@ import NotLogged from "../components/NotLogged";
 import FirstRow from "../components/sell product components/FirstRow";
 import SecondRow from "../components/sell product components/SecondRow";
 import UserContext from "../context/UserContext";
-import { useMutation } from "react-query";
-import { UpdateProduct } from "../Queries";
+import ProductContext from "../context/ProductContext"
 import { useHistory } from "react-router-dom";
+import Axios from "axios";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EditingProduct(props) {
   //Hooks
   const { userData } = useContext(UserContext);
+  const {setProductId} = useContext(ProductContext)
   const [type, setType] = useState(props.type);
   const [material, setMaterial] = useState(props.material);
   const [name, setName] = useState(props.name);
@@ -30,32 +32,43 @@ export default function EditingProduct(props) {
   const [img, setImg] = useState(props.img);
   const [vendor, setVendor] = useState(userData.user.displayName);
   const [error, setError] = useState();
-  const history = useHistory();
   const classes = useStyles();
+  const history = useHistory();
+
+
+  const _id =props.id
 
   //Query
-  const [mutate] = useMutation(UpdateProduct);
 
   const editHandler = async (e) => {
     e.preventDefault();
     try {
-      await mutate({
-        _id: props.id,
-        name: name,
-        vendor: vendor,
-        price: price,
-        img: img,
-        type: type,
-        material: material,
-        amount: amount,
-        token: userData.token,
-      }); 
+      const newProduct = {_id, name, vendor, price, img, type, material, amount };
+      await Axios({
+        method: "patch",
+        url: "http://localhost:5000/products/updateProduct",
+        data: newProduct,
+        headers: { "X-auth-token": userData.token },
+      });
+
+      setProductId(_id);
       
-        history.push("/dash");
- 
-        } catch (err) {
+      history.push("/product");
+    } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
+  };
+
+  /////  
+  const cancelHandler = () => {
+    setType("");
+    setMaterial("");
+    setName("");
+    setAmount("");
+    setPrice("");
+    setImg("");
+    setVendor("");
+    props.setListing(true);
   };
 
   return (
@@ -65,12 +78,12 @@ export default function EditingProduct(props) {
           {" "}
           <Typography variant="h5">Edit product</Typography>
           <br />
-          {error && (
+          {error ? (
             <ErrorNotice
               message={error}
               clearError={() => setError(undefined)}
             />
-          )}
+          ): null}
           <form className={classes.root} noValidate autoComplete="off">
             <FirstRow
               type={type}
@@ -96,6 +109,13 @@ export default function EditingProduct(props) {
               {" "}
               <Button variant="contained" color="primary" onClick={editHandler}>
                 Edit Item{" "}
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={cancelHandler}
+              >
+                Cancel Edit
               </Button>
             </>
           </form>

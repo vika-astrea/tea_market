@@ -125,7 +125,7 @@ export default function UniqueProductContainer(props) {
           <AddToCartButton/>
         </Grid>
         <Grid item xs={3}>
-          {userData.user.wishlist.includes(props.id) ? (
+          {userData.user.wishlist.includes(productId) ? (
             <Button
               variant={"outlined"}
               color="secondary"

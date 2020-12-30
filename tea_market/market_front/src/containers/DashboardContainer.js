@@ -19,7 +19,7 @@ export default function DashboardContainer() {
   const [amount, setAmount] = useState("");
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
-  const [id, setId]= useState("")
+  const [id, setId] = useState("");
 
   //
 
@@ -42,6 +42,7 @@ export default function DashboardContainer() {
           <Typography variant="h3">My Dashboard</Typography>
           <br />
           <Typography variant="h6">My items on sale:</Typography>
+          <br/>
           {data.length === 0 ? (
             <>
               <Typography variant="h7">
@@ -59,29 +60,42 @@ export default function DashboardContainer() {
               </Button>
             </>
           ) : listing ? (
-            <DashList
-              data={data}
-              token={userData.token}
-              setListing={setListing}
-              setType={setType} 
-              setMaterial={setMaterial}
-              setName={setName}
-              setAmount={setAmount}
-              setPrice={setPrice}
-              setImg={setImg}
-              setId={setId}
-
-            />
+            <>
+              <DashList
+                data={data}
+                token={userData.token}
+                setListing={setListing}
+                setType={setType}
+                setMaterial={setMaterial}
+                setName={setName}
+                setAmount={setAmount}
+                setPrice={setPrice}
+                setImg={setImg}
+                setId={setId}
+              />
+              <br/>
+              <br/>
+              <Button
+                color="primary"
+                variant="outlined"
+                onClick={handleSellClick}
+              >
+                {" "}
+                + Sell Item{" "}
+              </Button>
+            </>
           ) : (
             <EditingProduct
-            type={type} 
-            material={material}
-            name={name}
-            amount={amount}
-            price={price}
-            img={img}
-            id={id}
-            />)}
+              type={type}
+              material={material}
+              name={name}
+              amount={amount}
+              price={price}
+              img={img}
+              id={id}
+              setListing={setListing}
+            />
+          )}
         </>
       ) : (
         <NotLogged />

@@ -3,19 +3,17 @@ import Axios from "axios";
 import { Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import UserContext from "../../context/UserContext";
-import ProductContext from "../../context/ProductContext";
 import { useHistory } from "react-router-dom";
 
 
-export default function AddToCartButton() {
+export default function CartWishlist(props) {
   const { userData } = useContext(UserContext);
-  const { productId } = useContext(ProductContext);
-  let history = useHistory();
+ let history = useHistory();
 
   const addToCart = async (e) => {
     e.preventDefault();
     try {
-      const prodToAdd = { _id: userData.user.id, productId: productId };
+      const prodToAdd = { _id: userData.user.id, productId: props.id };
       await Axios({
         method: "put",
         url: "http://localhost:5000/user/addToCart",
@@ -27,7 +25,7 @@ export default function AddToCartButton() {
 
   
   return (
-    <>{userData.user.cart.includes(productId) ? (        <Button
+    <>{userData.user.cart.includes(props.id) ? (        <Button
       variant="outlined"
       color="primary"
       startIcon={<ShoppingCartIcon />}

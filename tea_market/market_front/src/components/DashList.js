@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
   Avatar,
-  IconButton,
   List,
   ListItem,
   ListItemAvatar,
@@ -9,19 +8,16 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import LabelIcon from "@material-ui/icons/Label";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteProductButton from "./buttons/DeleteProductButton";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductContext from "../context/ProductContext";
 import { useHistory } from "react-router-dom";
-
+import DashButtons from "./buttons/DashButtons";
 
 export default function DashList(props) {
   const [dense] = useState(false);
   const [secondary] = useState(false);
   const { setProductId } = useContext(ProductContext);
   let history = useHistory();
-
 
   //Styling
   const useStyles = makeStyles((theme) => ({
@@ -49,8 +45,10 @@ export default function DashList(props) {
               <ListItem
                 key={product._id}
                 button="true"
-                onClick={(e)=>{setProductId(product._id);
-                  history.push("/product")}}
+                onClick={(e) => {
+                  setProductId(product._id);
+                  history.push("/product");
+                }}
               >
                 <ListItemAvatar>
                   <Avatar>
@@ -61,24 +59,20 @@ export default function DashList(props) {
                   primary={product.name}
                   secondary={secondary ? "Secondary text" : null}
                 />
-                <DeleteProductButton token={props.token} _id={product._id} />
                 <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="edit"
-                    onClick={(e) => {
-                      props.setListing(false);
-                      props.setType(product.type);
-                      props.setMaterial(product.material);
-                      props.setName(product.name);
-                      props.setAmount(product.amount);
-                      props.setPrice(product.price);
-                      props.setImg(product.img);
-                      props.setId(product._id);
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton>
+                  <DashButtons
+                    token={props.token}
+                    _id={product._id}
+                    setListing={props.setListing}
+                    setType={props.setType}
+                    setMaterial={props.setMaterial}
+                    setName={props.setName}
+                    setAmount={props.setAmount}
+                    setPrice={props.setPrice}
+                    setImg={props.setImg}
+                    setId={props.setId}
+                    product={product}
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
             );

@@ -29,7 +29,6 @@ export default function WishlistContainer() {
   const wishlistIds = {
     _id: userData.user.wishlist,
   };
-  console.log(wishlistIds)
 
   let wishlistData = JSON.stringify(wishlistIds);
 
@@ -68,15 +67,9 @@ export default function WishlistContainer() {
             {data.map((product, _id) => {
               return (
                 <WishlistCard
-                  name={product.name}
-                  img={product.img}
+                key={product._id}
                   product={product}
-                  vendor={product.vendor}
-                  type={product.type}
-                  material={product.material}
-                  price={product.price}
-                  amount={product.amount}
-                  id={product._id}
+ 
                   buyerId={userData.user.id}
                   token={userData.token}
                 />

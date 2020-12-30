@@ -16,13 +16,16 @@ import { useQuery } from "react-query";
 import RemoveCartButton from "../components/buttons/RemoveCartButton";
 import NotLogged from "../components/NotLogged";
 import UserContext from "../context/UserContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import ProductContext from "../context/ProductContext";
+
 
 
 export default function CartContainer() {
   const { userData } = useContext(UserContext);
-  let history = useHistory();
+  const { setProductId } = useContext(ProductContext);
 
+  let history = useHistory();
 
   const cartIds = {
     _id: userData.user.cart,
@@ -30,22 +33,11 @@ export default function CartContainer() {
 
   let cartData = JSON.stringify(cartIds);
 
-  let config = {
-    method: "post",
-    url: "http://localhost:5000/products/cartProducts",
-    headers: {
-      "x-auth-token": userData.token,
-      "Content-Type": "application/json",
-    },
-    data: cartData,
-  };
+  function handleEnd() {
+    history.push("/end");
+  }
 
-  const GetCart = async () => {
-    const { data } = await axios(config);
-    return data;
-  };
-
-
+  //Style
   const [dense] = useState(false);
   const [secondary] = useState(false);
 
@@ -62,11 +54,24 @@ export default function CartContainer() {
     },
   }));
   const classes = useStyles();
-  function handleEnd() {
-    history.push("/end");
+
+  //Query
+  let config = {
+    method: "post",
+    url: "http://localhost:5000/products/cartProducts",
+    headers: {
+      "x-auth-token": userData.token,
+      "Content-Type": "application/json",
+    },
+    data: cartData,
   };
 
-  const { isLoading, error, data } = useQuery('cart', GetCart);
+  const GetCart = async () => {
+    const { data } = await axios(config);
+    return data;
+  };
+
+  const { isLoading, error, data } = useQuery("cart", GetCart);
 
   if (isLoading) return "Loading...";
 
@@ -85,27 +90,47 @@ export default function CartContainer() {
       {userData.isLoggedIn ? (
         <>
           <Typography variant="h3">My Cart</Typography>
+          <br />
+
           <div className={classes.demo}>
-            <List dense={dense}>
-              {data.map((product, _id) => {
-                return (
-                  <ListItem key={product._id}>
-                    <ListItemAvatar>
-                      <CheckCircleIcon color="primary" />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={`${product.name} - by ${product.vendor}`}
-                      secondary={
-                        secondary ? "Secondary text" : `$ ${product.price}`
-                      }
-                    />
-                    <ListItemSecondaryAction>
-                      <RemoveCartButton productId={product._id} _id={userData.user.id} token={userData.token} />
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
-              })}
-            </List>
+            {userData.user.cart.length === 0 ? (
+              <Typography>
+                {" "}
+                Your Cart is empty!
+                <Link to="/"> Browse our catalog and start buying now! </Link>
+              </Typography>
+            ) : (
+              <List dense={dense}>
+                {data.map((product, _id) => {
+                  return (
+                    <ListItem key={product._id}
+                    button="true"
+                    onClick={(e) => {
+                      setProductId(product._id);
+                      history.push("/product");
+                    }}>
+                      <ListItemAvatar>
+                        <CheckCircleIcon color="primary" />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={`${product.name} - by ${product.vendor}`}
+                        secondary={
+                          secondary ? "Secondary text" : `$ ${product.price}`
+                        }
+                      />
+                      <ListItemSecondaryAction>
+                        <RemoveCartButton
+                          productId={product._id}
+                          _id={userData.user.id}
+                          token={userData.token}
+                        />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            )}
+
             <Divider />
             <br />
 

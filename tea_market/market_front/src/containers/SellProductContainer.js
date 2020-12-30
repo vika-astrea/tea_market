@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SellProductContainer() {
+  //Hooks
   const { userData } = useContext(UserContext);
   const [type, setType] = useState("");
   const [material, setMaterial] = useState("");
@@ -27,12 +28,11 @@ export default function SellProductContainer() {
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
   const [vendor, setVendor] = useState("");
-
   const [error, setError] = useState();
   const history = useHistory();
-
   const classes = useStyles();
 
+  //Query
   const submit = async (e) => {
     e.preventDefault();
     try {

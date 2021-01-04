@@ -36,6 +36,11 @@ router.get("/userProducts", auth, async (req, res) => {
   res.json(products);
 });
 
+router.post("/vendorProducts", async (req, res) => {
+  const products = await Product.find({ userId: {$in: req.body.userId} });
+  res.json(products);
+});
+
 router.post("/cartProducts", auth, async (req, res) => {
       const cartProducts = await Product.find({ _id: {$in:req.body._id} });
   res.json(cartProducts);
@@ -110,7 +115,8 @@ router.post("/product", async (req, res) => {
     img: product.img,  
     type: product.type,
     material: product.material,
-    amount:product.amount,    
+    amount:product.amount,
+    userId: product.userId,  
   });
 });
 

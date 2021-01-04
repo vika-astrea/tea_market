@@ -293,4 +293,13 @@ router.get("/", auth, async (req, res) => {
   });
 });
 
+
+
+router.post("/vendorName", async (req, res) => {
+  const user = await User.findById(req.body.userName);
+  res.json({
+    vendorName: user.displayName,
+  });
+});
+
 module.exports = router;

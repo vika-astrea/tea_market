@@ -87,4 +87,3 @@ export const DelUser=  async(info)=>{
   });
   return data
 }
-

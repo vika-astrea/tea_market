@@ -1,4 +1,4 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, Link, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +12,7 @@ import AddToCartButton from "../components/buttons/AddToCartButton";
 import { useHistory } from "react-router-dom";
 import { RemoveFromWishlist } from "../Queries";
 import ProductContext from "../context/ProductContext";
+import VendorContext from "../context/VendorContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,8 @@ export default function UniqueProductContainer(props) {
   const classes = useStyles();
   let history = useHistory();
   const { userData } = useContext(UserContext);
-  const {productId, setProductId} = useContext(ProductContext) 
+  const { productId, setProductId } = useContext(ProductContext);
+  const { setVendorId } = useContext(VendorContext)
   const [mutate] = useMutation(RemoveFromWishlist);
 
   const addToWishlist = async (e) => {
@@ -110,7 +112,8 @@ export default function UniqueProductContainer(props) {
             <Typography variant="h5">
               {data.type} ({data.material})
             </Typography>
-            <Typography>by {data.vendor}</Typography>
+            <br />
+            <Link style={{cursor: "pointer"}} onClick={(e) => {setVendorId(data.userId); history.push("/vendor")}}>by {data.vendor}</Link>
             <br />
             <br />
             <Typography variant="h4">
@@ -122,7 +125,7 @@ export default function UniqueProductContainer(props) {
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           {" "}
-          <AddToCartButton/>
+          <AddToCartButton />
         </Grid>
         <Grid item xs={3}>
           {userData.user.wishlist.includes(productId) ? (

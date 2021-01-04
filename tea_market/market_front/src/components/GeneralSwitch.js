@@ -9,6 +9,7 @@ import RegisterContainer from "../containers/RegisterContainer";
 import SellProductContainer from "../containers/SellProductContainer";
 import SettingsContainer from "../containers/SettingsContainer";
 import UniqueProductContainer from "../containers/UniqueProductContainer";
+import VendorContainer from "../containers/VendorContainer";
 import WishlistContainer from "../containers/WishlistContainer";
 
 export default function GeneralSwitch(props) {
@@ -46,6 +47,9 @@ export default function GeneralSwitch(props) {
       </Route>
       <Route path="/product">
         <UniqueProductContainer  setType={props.setType} />
+      </Route>
+      <Route path="/vendor">
+        <VendorContainer/>
       </Route>
     </Switch>
   );

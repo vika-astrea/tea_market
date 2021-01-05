@@ -119,6 +119,10 @@ export default function UniqueProductContainer(props) {
             <Typography variant="h4">
               ${data.price} for {data.amount}
             </Typography>
+
+            <Typography variant="subtitle1">
+              {data.stock} units available.  
+            </Typography>
           </Paper>
         </Grid>
         <Grid item xs={3}></Grid>

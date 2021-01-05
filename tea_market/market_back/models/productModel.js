@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema({
   type: { type: String, required: true },
   material: { type: String, required: true },
   amount: { type: String, required: true },
+  stock:{type: Number, required: true },
   userId: { type: String, required: true },
 });
 

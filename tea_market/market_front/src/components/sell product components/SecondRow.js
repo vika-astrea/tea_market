@@ -37,6 +37,16 @@ export default function SecondRow(props) {
         />
       </FormControl>
       <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="stock">Units available</InputLabel>
+        <Input
+          type="number"
+          id="stock"
+          endAdornment={<InputAdornment position="end">Units</InputAdornment>}
+          onChange={(e) => props.setStock(e.target.value)}
+          value={props.stock}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <TextField id="img" label="Hosted image url adress"
                 onChange={(e) => props.setUrl(e.target.value)}
                 value={props.url} />

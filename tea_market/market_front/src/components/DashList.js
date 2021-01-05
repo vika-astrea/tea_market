@@ -68,6 +68,7 @@ export default function DashList(props) {
                     setMaterial={props.setMaterial}
                     setName={props.setName}
                     setAmount={props.setAmount}
+                    setStock={props.setStock}
                     setPrice={props.setPrice}
                     setImg={props.setImg}
                     setId={props.setId}

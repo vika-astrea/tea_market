@@ -25,6 +25,7 @@ export default function SellProductContainer() {
   const [material, setMaterial] = useState("");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
   const [vendor, setVendor] = useState("");
@@ -36,7 +37,7 @@ export default function SellProductContainer() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const newProduct = { name, vendor, price, img, type, material, amount };
+      const newProduct = { name, vendor, price, img, type, material, amount,stock };
       await Axios({
         method: "post",
         url: "http://localhost:5000/products/new",
@@ -79,6 +80,8 @@ export default function SellProductContainer() {
               amount={amount}
               price={price}
               url={img}
+              stock = {stock}
+              setStock = {setStock}
               setAmount={setAmount}
               setPrice={setPrice}
               setUrl={setImg}

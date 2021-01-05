@@ -14,6 +14,7 @@ export default function DashButtons(props) {
           props.setMaterial(props.product.material);
           props.setName(props.product.name);
           props.setAmount(props.product.amount);
+          props.setStock(props.product.stock)
           props.setPrice(props.product.price);
           props.setImg(props.product.img);
           props.setId(props.product._id);

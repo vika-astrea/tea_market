@@ -28,6 +28,7 @@ export default function EditingProduct(props) {
   const [material, setMaterial] = useState(props.material);
   const [name, setName] = useState(props.name);
   const [amount, setAmount] = useState(props.amount);
+  const [stock, setStock] = useState(props.stock);
   const [price, setPrice] = useState(props.price);
   const [img, setImg] = useState(props.img);
   const [vendor, setVendor] = useState(userData.user.displayName);
@@ -43,7 +44,7 @@ export default function EditingProduct(props) {
   const editHandler = async (e) => {
     e.preventDefault();
     try {
-      const newProduct = {_id, name, vendor, price, img, type, material, amount };
+      const newProduct = {_id, name, vendor, price, img, type, material, amount,stock };
       await Axios({
         method: "patch",
         url: "http://localhost:5000/products/updateProduct",
@@ -65,6 +66,7 @@ export default function EditingProduct(props) {
     setMaterial("");
     setName("");
     setAmount("");
+    setStock("");
     setPrice("");
     setImg("");
     setVendor("");
@@ -100,9 +102,11 @@ export default function EditingProduct(props) {
               amount={amount}
               price={price}
               url={img}
+              stock={stock}
               setAmount={setAmount}
               setPrice={setPrice}
               setUrl={setImg}
+              setStock={setStock}
             />
             <br />
             <>

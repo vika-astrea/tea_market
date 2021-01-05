@@ -17,6 +17,7 @@ export default function DashboardContainer() {
   const [material, setMaterial] = useState("");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [stock, setStock] = useState("")
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
   const [id, setId] = useState("");
@@ -69,6 +70,7 @@ export default function DashboardContainer() {
                 setMaterial={setMaterial}
                 setName={setName}
                 setAmount={setAmount}
+                setStock={setStock}
                 setPrice={setPrice}
                 setImg={setImg}
                 setId={setId}
@@ -88,6 +90,7 @@ export default function DashboardContainer() {
             <EditingProduct
               type={type}
               material={material}
+              stock={stock}
               name={name}
               amount={amount}
               price={price}

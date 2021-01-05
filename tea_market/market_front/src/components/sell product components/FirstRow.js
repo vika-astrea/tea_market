@@ -63,6 +63,7 @@ export default function FirstRow(props) {
             <TextField
               id="Material"
               label="Material"
+              value={props.material}
               onChange={(e) => {
                 e.preventDefault();
                 props.setMaterial(e.target.value);

@@ -37,7 +37,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const newUser = new User({ email, password: passwordHash, displayName });
+    const newUser = new User({ email, password: passwordHash, displayName, cart, wishlist });
     const savedUser = await newUser.save();
     res.json(savedUser);
   } catch (err) {
@@ -70,6 +70,8 @@ router.post("/login", async (req, res) => {
       user: {
         id: user._id,
         displayName: user.displayName,
+        cart: user.cart,
+        wishlist: user.wishlist
       },
     });
   } catch (err) {

@@ -6,6 +6,9 @@ import Axios from "axios";
 import { useQuery } from "react-query";
 import WishlistCard from "../components/WishlistCard";
 import { GridList, makeStyles } from "@material-ui/core";
+import  { Link}   from "react-router-dom";
+
+
 
 export default function WishlistContainer() {
   const { userData } = useContext(UserContext);
@@ -63,7 +66,13 @@ export default function WishlistContainer() {
         <>
           {" "}
           <Typography variant="h3">My Wishlist</Typography>
-          <GridList cellHeight={180} className={classes.gridList}>
+          <br/>
+          <br/>
+          {userData.user.wishlist.length === 0 ? (  <Typography>
+                {" "}
+                Your Cart is empty!
+                <Link to="/"> Browse our catalog and start 💗 now! </Link>
+              </Typography>): ( <GridList cellHeight={180} className={classes.gridList}>
             {data.map((product, _id) => {
               return (
                 <WishlistCard
@@ -75,7 +84,8 @@ export default function WishlistContainer() {
                 />
               );
             })}
-          </GridList>
+          </GridList>)}
+         
         </>
       ) : (
         <NotLogged />

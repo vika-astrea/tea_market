@@ -1,0 +1,13 @@
+
+<div class="container-fluid">
+<h1>Skill App</h1>
+<h2>From your very nightmares to your home.</h2>
+<app-input-component></app-input-component>
+</div>
+
+<div style="display: flex;">
+<app-have-list [skills]="haveSkills"></app-have-list>
+<app-need-list></app-need-list>
+</div>
+
+<router-outlet></router-outlet>

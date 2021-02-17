@@ -1,0 +1,19 @@
+<!-- <h4>I need it</h4>
+<div *ngFor="let skill of skills; index as i">
+  <p> {{skill}}</p>
+  </div>
+ -->
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">I want it</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div *ngFor="let skill of skills; index as i">
+        <tr>
+          <td scope="row">{{skill}}</td>
+        </tr>
+      </div>
+    </tbody>
+  </table>
